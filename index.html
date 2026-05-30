@@ -169,23 +169,29 @@
         .attraction-card {
             background: #fff; border-radius: 16px; overflow: hidden;
             box-shadow: 0 4px 20px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s;
+            display: flex; flex-direction: column;
         }
         .attraction-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
         .attraction-img {
             height: 200px; display: flex; align-items: center; justify-content: center;
-            font-size: 3.5rem; position: relative;
+            font-size: 3.5rem; position: relative; overflow: hidden; flex-shrink: 0;
         }
-        .attraction-img .tag {
-            position: absolute; top: 12px; right: 12px;
-            padding: 4px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 600;
+        .slide-img {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            object-fit: cover; opacity: 0; transition: opacity 1.5s ease-in-out;
         }
-        .tag-free { background: #d1fae5; color: #059669; }
-        .tag-paid { background: #fef3c7; color: #d97706; }
-        .attraction-body { padding: 20px; }
+        .slide-img.active { opacity: 1; }
+        .slide-track { position: absolute; inset: 0; width: 100%; height: 100%; }
+        .dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.3s;
+        }
+        .dot.active { background: #fff; transform: scale(1.2); }
+    .attraction-body { padding: 20px; display: flex; flex-direction: column; flex: 1; }
         .attraction-body h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
         .attraction-body .sub { font-size: 0.8rem; color: #aaa; margin-bottom: 8px; display: block; }
         .attraction-body p { font-size: 0.88rem; color: #666; line-height: 1.7; }
-        .attraction-body .meta { margin-top: 12px; display: flex; gap: 12px; flex-wrap: wrap; }
+        .attraction-body .meta { margin-top: auto; display: flex; gap: 12px; flex-wrap: wrap; padding-top: 12px; }
         .attraction-body .meta span {
             font-size: 0.78rem; padding: 4px 10px; border-radius: 8px;
             background: #f0f7ff; color: #1a73e8;
@@ -447,7 +453,6 @@
             <div class="attraction-card">
                 <div class="attraction-img img-north-2">
                     🌀
-                    <span class="tag tag-free">免费</span>
                 </div>
                 <div class="attraction-body">
                     <h3>长江澳风车田</h3>
@@ -459,7 +464,6 @@
             <div class="attraction-card">
                 <div class="attraction-img img-north-1">
                     🏞️
-                    <span class="tag tag-paid">¥22</span>
                 </div>
                 <div class="attraction-body">
                     <h3>仙人井（东海仙境）</h3>
@@ -471,7 +475,6 @@
             <div class="attraction-card">
                 <div class="attraction-img img-north-6">
                     🛣️
-                    <span class="tag tag-free">免费</span>
                 </div>
                 <div class="attraction-body">
                     <h3>北部生态廊道（岚道）</h3>
@@ -483,7 +486,6 @@
             <div class="attraction-card">
                 <div class="attraction-img img-north-4">
                     🪨
-                    <span class="tag tag-free">免费</span>
                 </div>
                 <div class="attraction-body">
                     <h3>镜沙黑沙滩</h3>
@@ -495,7 +497,6 @@
             <div class="attraction-card">
                 <div class="attraction-img img-north-5">
                     🌾
-                    <span class="tag tag-free">免费</span>
                 </div>
                 <div class="attraction-body">
                     <h3>磹水村秋千</h3>
@@ -507,13 +508,64 @@
             <div class="attraction-card">
                 <div class="attraction-img img-north-7">
                     🏡
-                    <span class="tag tag-free">免费</span>
                 </div>
                 <div class="attraction-body">
                     <h3>和平村</h3>
                     <span class="sub">七彩石头屋与S弯公路</span>
                     <p>七彩石头屋建筑群和最美S弯海上公路交汇于此，彩色房子点缀在碧海蓝天之间，仿佛置身于欧洲小镇。</p>
                     <div class="meta"><span>🌈 七彩石屋</span><span>🛣️ S弯公路</span><span>🎫 免费</span></div>
+                </div>
+            </div>
+            <div class="attraction-card">
+                <div class="attraction-img img-north-3">
+                    🏔️
+                </div>
+                <div class="attraction-body">
+                    <h3>猫头墘</h3>
+                    <span class="sub">百年古村 · 山顶观景台</span>
+                    <p>三面环海的百年古村，因山形似卧猫得名。存有清嘉庆十二年（1807年）琉球遇难船员墓葬遗址（县级文保）。山顶观景台可俯瞰风车田与山海全景，入选福建省美丽乡村。</p>
+                    <div class="meta"><span>🤫 百年古村</span><span>🏔️ 山顶观景台</span><span>🎫 免费</span></div>
+                </div>
+            </div>
+            <div class="attraction-card">
+                <div class="attraction-img img-north-5">
+                    <div class="slide-track" id="slide-北岚岭">
+                        <img class="slide-img active" src="image/%E5%8C%97%E5%B2%9A%E5%B2%AD%E6%97%A5%E5%87%BA/%E5%8C%97%E5%B2%9A%E5%B2%AD%E6%97%A5%E5%87%BA1.jpg" alt="北岚岭日出">
+                        <img class="slide-img" src="image/%E5%8C%97%E5%B2%9A%E5%B2%AD%E6%97%A5%E5%87%BA/%E5%8C%97%E5%B2%9A%E5%B2%AD%E6%97%A5%E5%87%BA2.jpg" alt="北岚岭日出2">
+                    </div>
+                    <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 2;">
+                        <span class="dot active" data-slide="北岚岭" data-index="0"></span>
+                        <span class="dot" data-slide="北岚岭" data-index="1"></span>
+                    </div>
+                </div>
+                <div class="attraction-body">
+                    <h3>北岚岭日出</h3>
+                    <span class="sub">绝美海上日出观赏点</span>
+                    <p>北岚岭是平潭观赏海上日出的绝佳地点之一，清晨海面被染成金色，风车剪影与朝霞交相辉映，光影变幻极为壮观。</p>
+                    <div class="meta"><span>🌅 日出绝美</span><span>📸 摄影圣地</span><span>🎫 免费</span></div>
+                </div>
+            </div>
+            <div class="attraction-card">
+                <div class="attraction-img img-north-5">
+                    <div class="slide-track" id="slide-红岩山庄">
+                        <img class="slide-img active" src="image/%E7%BA%A2%E5%B2%A9%E5%B1%B1%E5%BA%84%E6%97%A5%E5%87%BA/%E7%BA%A2%E5%B2%A9%E5%B1%B1%E5%BA%84%E6%97%A5%E5%87%BA1.jpg" alt="红岩山庄日出">
+                        <img class="slide-img" src="image/%E7%BA%A2%E5%B2%A9%E5%B1%B1%E5%BA%84%E6%97%A5%E5%87%BA/%E7%BA%A2%E5%B2%A9%E5%B1%B1%E5%BA%84%E6%97%A5%E5%87%BA2.jpg" alt="红岩山庄日出2">
+                        <img class="slide-img" src="image/%E7%BA%A2%E5%B2%A9%E5%B1%B1%E5%BA%84%E6%97%A5%E5%87%BA/%E7%BA%A2%E5%B2%A9%E5%B1%B1%E5%BA%84%E6%97%A5%E5%87%BA3.jpg" alt="红岩山庄日出3">
+                    </div>
+                    <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 2;">
+                        <span class="dot active" data-slide="红岩山庄" data-index="0"></span>
+                        <span class="dot" data-slide="红岩山庄" data-index="1"></span>
+                        <span class="dot" data-slide="红岩山庄" data-index="2"></span>
+                    </div>
+                </div>
+                <div class="attraction-body">
+                    <h3>红岩山庄日出</h3>
+                    <span class="sub">海上日出绝佳观赏地</span>
+                    <p>红岩山庄位于平潭东海岸，因红色礁岩而得名。清晨在此可观赏壮丽的海上日出，朝霞映照红色礁岩，与碧海蓝天构成一幅绝美画卷。</p>
+                    <video controls preload="metadata" style="width: 100%; border-radius: 8px; margin-top: 12px;">
+                        <source src="video/%E7%BA%A2%E5%B2%A9%E5%B1%B1%E5%BA%84%E6%97%A5%E5%87%BA.mp4" type="video/mp4">
+                    </video>
+                    <div class="meta"><span>🌅 海上日出</span><span>🪨 红色礁岩</span><span>🎫 免费</span></div>
                 </div>
             </div>
         </div>
@@ -523,7 +575,6 @@
             <div class="attraction-card">
                 <div class="attraction-img img-south-1">
                     🏖️
-                    <span class="tag tag-free">免费</span>
                 </div>
                 <div class="attraction-body">
                     <h3>坛南湾</h3>
@@ -535,7 +586,6 @@
             <div class="attraction-card">
                 <div class="attraction-img img-south-2">
                     🏝️
-                    <span class="tag tag-paid">¥38</span>
                 </div>
                 <div class="attraction-body">
                     <h3>68海里景区（猴研岛）</h3>
@@ -547,7 +597,6 @@
             <div class="attraction-card">
                 <div class="attraction-img img-south-3">
                     🐘
-                    <span class="tag tag-free">免费</span>
                 </div>
                 <div class="attraction-body">
                     <h3>象鼻湾</h3>
@@ -559,7 +608,6 @@
             <div class="attraction-card">
                 <div class="attraction-img img-south-4">
                     🌅
-                    <span class="tag tag-free">免费</span>
                 </div>
                 <div class="attraction-body">
                     <h3>龙王头沙滩</h3>
@@ -571,7 +619,6 @@
             <div class="attraction-card">
                 <div class="attraction-img img-south-5">
                     ⛰️
-                    <span class="tag tag-paid">¥20</span>
                 </div>
                 <div class="attraction-body">
                     <h3>将军山</h3>
@@ -587,7 +634,6 @@
             <div class="attraction-card">
                 <div class="attraction-img img-island-1">
                     🐚
-                    <span class="tag tag-free">免费</span>
                 </div>
                 <div class="attraction-body">
                     <h3>东庠岛</h3>
@@ -598,14 +644,13 @@
             </div>
             <div class="attraction-card">
                 <div class="attraction-img img-island-2">
-                    🏔️
-                    <span class="tag tag-free">免费</span>
+                    🏝️
                 </div>
                 <div class="attraction-body">
-                    <h3>猫头墘</h3>
-                    <span class="sub">山海全景秘境</span>
-                    <p>位于平潭西北角的小众秘境，山海全景尽收眼底。这里有悬崖餐厅和特色民宿，是逃离喧嚣的世外桃源。</p>
-                    <div class="meta"><span>🤫 小众秘境</span><span>🍽️ 悬崖餐厅</span><span>🎫 免费</span></div>
+                    <h3>大练岛</h3>
+                    <span class="sub">通天门 · 公铁大桥直达</span>
+                    <p>拥有平潭最大最美的海蚀拱桥"通天门"，火山岩地貌独特。2020年平潭海峡公铁大桥通车后开车直达，岛上森林覆盖率达63.5%。</p>
+                    <div class="meta"><span>🌋 通天门海蚀拱桥</span><span>🌉 公铁大桥直达</span><span>🎫 免费</span></div>
                 </div>
             </div>
         </div>
@@ -635,31 +680,22 @@
                 </div>
             </div>
             <div>
-                <table class="tears-table">
-                    <thead>
-                        <tr><th>类型</th><th>时间</th><th>特点</th><th>最佳观测点</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>🌊 夜光藻型</td><td>4-6月</td><td>短促蓝涟漪，爆发力强</td><td>长江澳、龙王头、东美村</td></tr>
-                        <tr><td>✨ 海萤型</td><td>7-8月</td><td>发光更大更亮，持续120秒</td><td>东美村、模镜村</td></tr>
-                    </tbody>
-                </table>
                 <table class="tears-table" style="margin-top: 16px;">
                     <thead>
                         <tr><th>观测点</th><th>风格</th><th>推荐时段</th></tr>
                     </thead>
                     <tbody>
                         <tr><td>长江澳</td><td>风车+蓝眼泪+银河同框</td><td>21:00-03:00</td></tr>
-                        <tr><td>镜沙</td><td>黑礁石+蓝光暗黑高级感</td><td>22:00-01:00</td></tr>
-                        <tr><td>龙王头</td><td>沙滩阔大，近城区</td><td>夜间</td></tr>
+                        <tr><td>红岩山庄</td><td>沙滩开阔，近城区</td><td>夜间</td></tr>
+                        <tr><td>猫头墘</td><td>山海全景，光污染少</td><td>21:00-01:00</td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
         <div style="margin-top: 32px; text-align: center;">
-            <h4 style="color: #7dd3fc; margin-bottom: 16px; font-size: 1rem;">🎬 蓝眼泪实拍视频 <span style="display: inline-block; padding: 2px 10px; border-radius: 8px; background: rgba(56,189,248,0.2); color: #7dd3fc; font-size: 0.75rem; font-weight: 600; vertical-align: middle;">🚗 自动档</span></h4>
+            <h4 style="color: #7dd3fc; margin-bottom: 16px; font-size: 1rem;">🎬 蓝眼泪实拍视频 <span style="display: inline-block; padding: 2px 10px; border-radius: 8px; background: rgba(56,189,248,0.2); color: #7dd3fc; font-size: 0.75rem; font-weight: 600; vertical-align: middle;">🌊 自动档</span></h4>
             <video controls preload="metadata" style="width: 100%; max-width: 720px; border-radius: 16px; box-shadow: 0 8px 40px rgba(0,0,0,0.3);">
-                <source src="shipin/%E8%87%AA%E5%8A%A8%E6%8C%A1%E8%93%9D%E7%9C%BC%E6%B3%AA.mp4" type="video/mp4">
+                <source src="video/%E8%87%AA%E5%8A%A8%E6%8C%A1%E8%93%9D%E7%9C%BC%E6%B3%AA.mp4" type="video/mp4">
                 您的浏览器不支持视频播放
             </video>
             <p style="color: rgba(255,255,255,0.5); font-size: 0.8rem; margin-top: 8px;">📱 视频较大，建议在 WiFi 下观看</p>
@@ -695,10 +731,10 @@
                 <span class="price">特色海鲜</span>
             </div>
             <div class="food-card">
-                <div class="icon">🐚</div>
-                <h4>将军帽</h4>
-                <p>礁岩贝类，清蒸吃原味，口感鲜甜弹牙</p>
-                <span class="price">本地特产</span>
+                <div class="icon">🫓</div>
+                <h4>海蛎饼</h4>
+                <p>新鲜海蛎裹面糊油炸，外酥里嫩，一口爆汁</p>
+                <span class="price">街头小吃</span>
             </div>
             <div class="food-card">
                 <div class="icon">🍠</div>
@@ -712,9 +748,6 @@
                 <p>浓郁的汤底配上新鲜海产，一碗吃遍平潭味道</p>
                 <span class="price">推荐尝试</span>
             </div>
-        </div>
-        <div style="text-align: center; margin-top: 24px; color: #888; font-size: 0.9rem;">
-            🏪 推荐餐厅：海坛特色小吃 | 岭上海岛菜 | 竹笠海鲜大排档 | 福记弄堂海鲜捞面
         </div>
     </div>
 </section>
@@ -912,6 +945,22 @@
             nav.style.transform = 'translateY(0)';
         }
         lastScroll = curr;
+    });
+
+    // ===== Image Slideshow (manual) =====
+    document.querySelectorAll('.dot').forEach(dot => {
+        dot.addEventListener('click', () => {
+            const slide = dot.dataset.slide;
+            const idx = parseInt(dot.dataset.index);
+            const track = document.getElementById('slide-' + slide);
+            if (!track) return;
+            track.querySelectorAll('.slide-img').forEach((img, i) => {
+                img.classList.toggle('active', i === idx);
+            });
+            track.parentElement.querySelectorAll('.dot').forEach(d => {
+                d.classList.toggle('active', parseInt(d.dataset.index) === idx);
+            });
+        });
     });
 </script>
 
