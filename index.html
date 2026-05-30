@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>平潭岛旅游攻略 | 邂逅蓝眼泪·风车之岛</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* ===== Reset & Base ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            color: #2c3e50;
+            line-height: 1.8;
+            background: #f8f9fa;
+        }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+
+        /* ===== Navigation ===== */
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+            transition: transform 0.3s;
+        }
+        .nav-inner {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 24px; height: 64px;
+        }
+        .nav-logo {
+            font-weight: 900; font-size: 1.25rem;
+            background: linear-gradient(135deg, #1a73e8, #00b4d8);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .nav-links a {
+            padding: 6px 14px; border-radius: 20px; font-size: 0.85rem;
+            font-weight: 500; transition: all 0.3s; color: #555;
+        }
+        .nav-links a:hover { background: #e8f4fd; color: #1a73e8; }
+
+        /* ===== Hero ===== */
+        .hero {
+            position: relative; height: 100vh; min-height: 600px;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; overflow: hidden;
+            background: linear-gradient(135deg, #0c1a3a 0%, #1a3a6b 30%, #0d5e8a 60%, #0a7e9c 100%);
+        }
+        .hero::before {
+            content: ''; position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 20% 80%, rgba(0,180,216,0.15) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 50% at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 60%);
+        }
+        .hero-waves {
+            position: absolute; bottom: 0; left: 0; right: 0; height: 120px;
+        }
+        .hero-waves svg { width: 100%; height: 100%; }
+        .hero-content { position: relative; z-index: 2; padding: 0 24px; }
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 20px; border-radius: 20px;
+            background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+            color: #fff; font-size: 0.85rem; font-weight: 400;
+            letter-spacing: 2px; margin-bottom: 20px;
+        }
+        .hero h1 {
+            font-size: clamp(2.4rem, 6vw, 5rem); font-weight: 900;
+            color: #fff; line-height: 1.15;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+        .hero h1 span {
+            background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            color: rgba(255,255,255,0.75); font-size: 1.15rem;
+            max-width: 560px; margin: 20px auto 32px; font-weight: 300;
+        }
+        .hero-btn {
+            display: inline-block;
+            padding: 14px 40px; border-radius: 40px;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            color: #fff; font-weight: 600; font-size: 1rem;
+            transition: all 0.3s; border: none; cursor: pointer;
+            box-shadow: 0 8px 30px rgba(14,165,233,0.35);
+        }
+        .hero-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(14,165,233,0.45); }
+        .hero-stars {
+            position: absolute; inset: 0; z-index: 1; overflow: hidden;
+        }
+        .star {
+            position: absolute; width: 3px; height: 3px;
+            background: #fff; border-radius: 50%;
+            animation: twinkle var(--d) ease-in-out infinite alternate;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* ===== Stats Bar ===== */
+        .stats-bar {
+            display: flex; justify-content: center; gap: 48px;
+            padding: 32px 24px; flex-wrap: wrap;
+            background: #fff; border-bottom: 1px solid #eee;
+        }
+        .stat-item { text-align: center; }
+        .stat-num { font-size: 1.8rem; font-weight: 900; color: #1a73e8; }
+        .stat-label { font-size: 0.85rem; color: #888; margin-top: 2px; }
+
+        /* ===== Section Common ===== */
+        section { padding: 80px 24px; }
+        .section-title {
+            text-align: center; margin-bottom: 48px;
+        }
+        .section-title h2 {
+            font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 900;
+            color: #1a2a3a;
+        }
+        .section-title p {
+            color: #888; max-width: 600px; margin: 8px auto 0; font-size: 0.95rem;
+        }
+        .section-title .title-line {
+            width: 60px; height: 4px; border-radius: 2px;
+            background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+            margin: 12px auto 0;
+        }
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        /* ===== Intro ===== */
+        .intro { background: #fff; }
+        .intro-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+            align-items: center;
+        }
+        .intro-text p { color: #555; margin-bottom: 16px; font-size: 0.95rem; }
+        .intro-text .highlight {
+            color: #1a73e8; font-weight: 700;
+        }
+        .intro-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .intro-card {
+            background: #f0f7ff; border-radius: 16px; padding: 24px; text-align: center;
+            transition: transform 0.3s;
+        }
+        .intro-card:hover { transform: translateY(-4px); }
+        .intro-card .icon { font-size: 2rem; margin-bottom: 8px; }
+        .intro-card h4 { font-size: 0.95rem; font-weight: 700; }
+        .intro-card p { font-size: 0.8rem; color: #888; margin-top: 4px; }
+
+        /* ===== Attractions ===== */
+        .attractions { background: #f8f9fa; }
+        .attraction-tabs {
+            display: flex; justify-content: center; gap: 8px; margin-bottom: 32px; flex-wrap: wrap;
+        }
+        .attraction-tab {
+            padding: 10px 24px; border-radius: 24px; border: none;
+            background: #fff; color: #666; font-weight: 500; font-size: 0.9rem;
+            cursor: pointer; transition: all 0.3s; box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .attraction-tab:hover { background: #e8f4fd; color: #1a73e8; }
+        .attraction-tab.active { background: #1a73e8; color: #fff; box-shadow: 0 4px 16px rgba(26,115,232,0.3); }
+        .attraction-grid { display: none; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+        .attraction-grid.active { display: grid; }
+        .attraction-card {
+            background: #fff; border-radius: 16px; overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .attraction-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
+        .attraction-img {
+            height: 200px; display: flex; align-items: center; justify-content: center;
+            font-size: 3.5rem; position: relative;
+        }
+        .attraction-img .tag {
+            position: absolute; top: 12px; right: 12px;
+            padding: 4px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 600;
+        }
+        .tag-free { background: #d1fae5; color: #059669; }
+        .tag-paid { background: #fef3c7; color: #d97706; }
+        .attraction-body { padding: 20px; }
+        .attraction-body h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+        .attraction-body .sub { font-size: 0.8rem; color: #aaa; margin-bottom: 8px; display: block; }
+        .attraction-body p { font-size: 0.88rem; color: #666; line-height: 1.7; }
+        .attraction-body .meta { margin-top: 12px; display: flex; gap: 12px; flex-wrap: wrap; }
+        .attraction-body .meta span {
+            font-size: 0.78rem; padding: 4px 10px; border-radius: 8px;
+            background: #f0f7ff; color: #1a73e8;
+        }
+
+        /* Attraction image backgrounds */
+        .img-north-1 { background: linear-gradient(135deg, #0ea5e9, #38bdf8); }
+        .img-north-2 { background: linear-gradient(135deg, #6366f1, #818cf8); }
+        .img-north-3 { background: linear-gradient(135deg, #059669, #34d399); }
+        .img-north-4 { background: linear-gradient(135deg, #1e293b, #475569); }
+        .img-north-5 { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+        .img-north-6 { background: linear-gradient(135deg, #ec4899, #f472b6); }
+        .img-north-7 { background: linear-gradient(135deg, #14b8a6, #2dd4bf); }
+        .img-south-1 { background: linear-gradient(135deg, #0ea5e9, #7dd3fc); }
+        .img-south-2 { background: linear-gradient(135deg, #f97316, #fb923c); }
+        .img-south-3 { background: linear-gradient(135deg, #eab308, #facc15); }
+        .img-south-4 { background: linear-gradient(135deg, #06b6d4, #22d3ee); }
+        .img-south-5 { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
+        .img-island-1 { background: linear-gradient(135deg, #10b981, #6ee7b7); }
+        .img-island-2 { background: linear-gradient(135deg, #f43f5e, #fb7185); }
+
+        /* ===== Blue Tears ===== */
+        .blue-tears {
+            background: linear-gradient(135deg, #0c1a3a, #1a3a6b);
+            color: #fff;
+        }
+        .blue-tears .section-title h2 { color: #fff; }
+        .blue-tears .section-title p { color: rgba(255,255,255,0.6); }
+        .blue-tears .section-title .title-line { background: linear-gradient(90deg, #7dd3fc, #38bdf8); }
+        .tears-content { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+        .tears-text p { color: rgba(255,255,255,0.75); margin-bottom: 16px; font-size: 0.95rem; }
+        .tears-text .glow {
+            display: inline-block; padding: 2px 8px;
+            background: rgba(56,189,248,0.2); border-radius: 4px;
+            color: #7dd3fc; font-weight: 500;
+        }
+        .tears-table { width: 100%; border-collapse: collapse; }
+        .tears-table th, .tears-table td {
+            padding: 12px 16px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.88rem;
+        }
+        .tears-table th { color: #7dd3fc; font-weight: 600; }
+        .tears-table td { color: rgba(255,255,255,0.8); }
+        .tears-tips {
+            margin-top: 24px; padding: 20px; border-radius: 16px;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+        }
+        .tears-tips h4 { color: #7dd3fc; margin-bottom: 8px; }
+        .tears-tips ul { list-style: none; padding: 0; }
+        .tears-tips li {
+            padding: 4px 0; font-size: 0.88rem;
+            color: rgba(255,255,255,0.7);
+        }
+        .tears-tips li::before { content: '✦ '; color: #38bdf8; }
+
+        /* ===== Food ===== */
+        .food { background: #fff; }
+        .food-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px;
+        }
+        .food-card {
+            background: #f8f9fa; border-radius: 16px; padding: 24px; text-align: center;
+            transition: transform 0.3s;
+        }
+        .food-card:hover { transform: translateY(-4px); }
+        .food-card .icon { font-size: 2.5rem; margin-bottom: 12px; }
+        .food-card h4 { font-weight: 700; margin-bottom: 4px; }
+        .food-card p { font-size: 0.85rem; color: #888; }
+        .food-card .price {
+            display: inline-block; margin-top: 8px; padding: 2px 12px;
+            border-radius: 8px; background: #e8f4fd; color: #1a73e8;
+            font-size: 0.8rem; font-weight: 600;
+        }
+
+        /* ===== Itinerary ===== */
+        .itinerary { background: #f8f9fa; }
+        .itin-card {
+            background: #fff; border-radius: 16px; padding: 32px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04); margin-bottom: 24px;
+        }
+        .itin-card h3 {
+            font-size: 1.1rem; font-weight: 700; margin-bottom: 16px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .itin-card h3 .day-badge {
+            display: inline-block; padding: 2px 12px; border-radius: 12px;
+            background: #1a73e8; color: #fff; font-size: 0.8rem;
+        }
+        .itin-row {
+            display: flex; gap: 8px; padding: 8px 0; border-bottom: 1px dashed #eee;
+            font-size: 0.9rem;
+        }
+        .itin-row:last-child { border: none; }
+        .itin-row .time { color: #1a73e8; font-weight: 600; min-width: 60px; }
+        .itin-row .desc { color: #555; }
+
+        /* ===== Tips ===== */
+        .tips { background: #fff; }
+        .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .tip-card {
+            padding: 24px; border-radius: 16px; border: 1px solid #eee;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .tip-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
+        .tip-card .icon { font-size: 1.8rem; margin-bottom: 8px; }
+        .tip-card h4 { font-weight: 700; margin-bottom: 4px; font-size: 0.95rem; }
+        .tip-card p { font-size: 0.85rem; color: #888; line-height: 1.7; }
+        .tip-card.warn { border-left: 4px solid #f59e0b; }
+        .tip-card.good { border-left: 4px solid #10b981; }
+
+        /* ===== Transport ===== */
+        .transport { background: #f8f9fa; }
+        .transport-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .transport-card {
+            background: #fff; border-radius: 16px; padding: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04); text-align: center;
+            display: flex; flex-direction: column;
+        }
+        .transport-card p { font-size: 0.88rem; color: #888; flex: 1; }
+        .transport-card .route { margin-top: 12px; padding: 10px; border-radius: 8px; background: #f0f7ff; font-size: 0.85rem; color: #1a73e8; }
+        .transport-card .route { margin-top: 12px; padding: 10px; border-radius: 8px; background: #f0f7ff; font-size: 0.85rem; color: #1a73e8; }
+
+        /* ===== Footer ===== */
+        footer {
+            background: #0c1a3a; color: rgba(255,255,255,0.5);
+            text-align: center; padding: 32px 24px; font-size: 0.85rem;
+        }
+        footer span { color: #38bdf8; }
+
+        /* ===== Back to Top ===== */
+        .back-top {
+            position: fixed; bottom: 32px; right: 32px; z-index: 999;
+            width: 48px; height: 48px; border-radius: 50%;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            color: #fff; border: none; cursor: pointer;
+            font-size: 1.2rem; box-shadow: 0 4px 16px rgba(14,165,233,0.3);
+            opacity: 0; transform: translateY(20px);
+            transition: all 0.3s; pointer-events: none;
+        }
+        .back-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        .back-top:hover { transform: translateY(-4px); }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .intro-grid { grid-template-columns: 1fr; }
+            .intro-cards { grid-template-columns: 1fr 1fr; }
+            .tears-content { grid-template-columns: 1fr; }
+            .attraction-grid { grid-template-columns: 1fr; }
+            .stats-bar { gap: 24px; }
+            .hero h1 { font-size: 2.2rem; }
+        }
+        @media (max-width: 480px) {
+            section { padding: 48px 16px; }
+            .intro-cards { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== Navigation ===== -->
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <a href="#" class="nav-logo">🌊 平潭漫游</a>
+        <div class="nav-links">
+            <a href="#intro">概览</a>
+            <a href="#attractions">景点</a>
+            <a href="#blue-tears">蓝眼泪</a>
+            <a href="#food">美食</a>
+            <a href="#itinerary">行程</a>
+            <a href="#tips">贴士</a>
+            <a href="#transport">交通</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+    <div class="hero-stars" id="stars"></div>
+    <div class="hero-content">
+        <div class="hero-badge">🌏 被《国家地理》评为中国最美海岛</div>
+        <h1>邂逅 <span>平潭</span> 岛</h1>
+        <p>在离台湾最近的蓝色海岛上，追逐梦幻蓝眼泪，漫步风车田，<br>住进石头厝，开启你的治愈系海岛之旅。</p>
+        <a href="#intro" class="hero-btn">开始探索 ↓</a>
+    </div>
+    <div class="hero-waves">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+            <path d="M0,40 C240,100 480,0 720,40 C960,80 1200,0 1440,40 L1440,120 L0,120 Z" fill="rgba(255,255,255,0.03)"/>
+            <path d="M0,60 C240,20 480,80 720,60 C960,40 1200,80 1440,60 L1440,120 L0,120 Z" fill="rgba(255,255,255,0.06)"/>
+            <path d="M0,80 C240,60 480,100 720,80 C960,60 1200,100 1440,80 L1440,120 L0,120 Z" fill="rgba(255,255,255,0.1)"/>
+        </svg>
+    </div>
+</section>
+
+<!-- ===== Stats ===== -->
+<div class="stats-bar">
+    <div class="stat-item"><div class="stat-num">68</div><div class="stat-label">离台湾海里</div></div>
+    <div class="stat-item"><div class="stat-num">1-6</div><div class="stat-label">蓝眼泪爆发期（月）</div></div>
+    <div class="stat-item"><div class="stat-num">30</div><div class="stat-label">福州高铁直达（分钟）</div></div>
+    <div class="stat-item"><div class="stat-num">1500+</div><div class="stat-label">人均预算（元）</div></div>
+</div>
+
+<!-- ===== Intro ===== -->
+<section class="intro" id="intro">
+    <div class="container">
+        <div class="section-title">
+            <h2>关于平潭</h2>
+            <p>福建第一大岛，中国第五大岛，距离台湾最近的海岛</p>
+            <div class="title-line"></div>
+        </div>
+        <div class="intro-grid">
+            <div class="intro-text">
+                <p><span class="highlight">平潭岛</span>，简称"岚"，位于福建省东部，与台湾新竹隔海相望仅68海里。这里拥有 <span class="highlight">408公里</span> 的绝美海岸线，被《中国国家地理》评为"中国最美海岛"。</p>
+                <p>平潭是 <span class="highlight">世界三大风口之一</span>，与百慕大、好望角齐名，因此造就了壮观的海上风车田景观。这里还有独特的石头厝建筑、令人惊叹的蓝眼泪奇观，以及丰富的海鲜美食。</p>
+                <p>近年来平潭成为国内最热门的海岛旅行目的地之一，被誉为"东方的马尔代夫"、"福建的圣托里尼"。</p>
+            </div>
+            <div class="intro-cards">
+                <div class="intro-card">
+                    <div class="icon">🌊</div>
+                    <h4>蓝眼泪</h4>
+                    <p>梦幻荧光海，1-6月爆发</p>
+                </div>
+                <div class="intro-card">
+                    <div class="icon">🌀</div>
+                    <h4>风车海</h4>
+                    <p>海边风车田，日落橘子海</p>
+                </div>
+                <div class="intro-card">
+                    <div class="icon">🏘️</div>
+                    <h4>石头厝</h4>
+                    <p>百年花岗岩古村落</p>
+                </div>
+                <div class="intro-card">
+                    <div class="icon">🦐</div>
+                    <h4>海鲜盛宴</h4>
+                    <p>时来运转·八珍炒糕</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Attractions ===== -->
+<section class="attractions" id="attractions">
+    <div class="container">
+        <div class="section-title">
+            <h2>热门景点</h2>
+            <p>平潭主要分为北线、南线和离岛三大区域</p>
+            <div class="title-line"></div>
+        </div>
+        <div class="attraction-tabs">
+            <button class="attraction-tab active" data-tab="north">🏔️ 北线</button>
+            <button class="attraction-tab" data-tab="south">🏖️ 南线</button>
+            <button class="attraction-tab" data-tab="island">🏝️ 离岛</button>
+        </div>
+
+        <!-- North -->
+        <div class="attraction-grid active" id="tab-north">
+            <div class="attraction-card">
+                <div class="attraction-img img-north-2">
+                    🌀
+                    <span class="tag tag-free">免费</span>
+                </div>
+                <div class="attraction-body">
+                    <h3>长江澳风车田</h3>
+                    <span class="sub">平潭标志性景观</span>
+                    <p>数十座巨型白色风车矗立沙滩与海面之上，碧海蓝天与风车交相辉映，日落时海面被染成金色，被誉为"橘子海"，是看日落的最佳地点。</p>
+                    <div class="meta"><span>📸 最佳拍摄 16:00-18:00</span><span>🌅 日落绝美</span><span>🎫 免费</span></div>
+                </div>
+            </div>
+            <div class="attraction-card">
+                <div class="attraction-img img-north-1">
+                    🏞️
+                    <span class="tag tag-paid">¥22</span>
+                </div>
+                <div class="attraction-body">
+                    <h3>仙人井（东海仙境）</h3>
+                    <span class="sub">海蚀地貌奇观</span>
+                    <p>深47米、直径约50米的天然海蚀竖井，涨潮时海水从三方涌入井底，涛声轰鸣如"龙宫奏乐"，气势恢宏壮观。</p>
+                    <div class="meta"><span>🌊 涨潮时最佳</span><span>⚠️ 注意防滑</span><span>🎫 ¥22</span></div>
+                </div>
+            </div>
+            <div class="attraction-card">
+                <div class="attraction-img img-north-6">
+                    🛣️
+                    <span class="tag tag-free">免费</span>
+                </div>
+                <div class="attraction-body">
+                    <h3>北部生态廊道（岚道）</h3>
+                    <span class="sub">风车海全景公路</span>
+                    <p>沿北部海岸线蜿蜒的全景公路，F2玻璃栈道、F5观景台可俯瞰整个风车海，途经童话小镇S弯公路，仿佛是宫崎骏动画中的场景。</p>
+                    <div class="meta"><span>📸 F5观景台</span><span>🛣️ S弯公路</span><span>🎫 免费</span></div>
+                </div>
+            </div>
+            <div class="attraction-card">
+                <div class="attraction-img img-north-4">
+                    🪨
+                    <span class="tag tag-free">免费</span>
+                </div>
+                <div class="attraction-body">
+                    <h3>镜沙黑沙滩</h3>
+                    <span class="sub">"福建小冰岛"</span>
+                    <p>黑色火山礁石与海蚀洞穴构成的独特景观，退潮后露出黑色沙滩，阴天时充满"末世感"，非常适合拍摄暗黑风格大片。</p>
+                    <div class="meta"><span>📸 暗黑风出片</span><span>🌊 退潮前往</span><span>🎫 免费</span></div>
+                </div>
+            </div>
+            <div class="attraction-card">
+                <div class="attraction-img img-north-5">
+                    🌾
+                    <span class="tag tag-free">免费</span>
+                </div>
+                <div class="attraction-body">
+                    <h3>磹水村秋千</h3>
+                    <span class="sub">宫崎骏同款海景秋千</span>
+                    <p>面朝大海的网红秋千，晴天时以碧海蓝天为背景，坐在秋千上如同飞向大海，是少女心爆棚的拍照打卡点。</p>
+                    <div class="meta"><span>🎠 网红秋千</span><span>📸 出片圣地</span><span>🎫 免费</span></div>
+                </div>
+            </div>
+            <div class="attraction-card">
+                <div class="attraction-img img-north-7">
+                    🏡
+                    <span class="tag tag-free">免费</span>
+                </div>
+                <div class="attraction-body">
+                    <h3>和平村</h3>
+                    <span class="sub">七彩石头屋与S弯公路</span>
+                    <p>七彩石头屋建筑群和最美S弯海上公路交汇于此，彩色房子点缀在碧海蓝天之间，仿佛置身于欧洲小镇。</p>
+                    <div class="meta"><span>🌈 七彩石屋</span><span>🛣️ S弯公路</span><span>🎫 免费</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- South -->
+        <div class="attraction-grid" id="tab-south">
+            <div class="attraction-card">
+                <div class="attraction-img img-south-1">
+                    🏖️
+                    <span class="tag tag-free">免费</span>
+                </div>
+                <div class="attraction-body">
+                    <h3>坛南湾</h3>
+                    <span class="sub">"白金海岸"果冻海</span>
+                    <p>7公里细白沙滩，海水清澈见底呈果冻色，被誉为"白金海岸"。这里也是蓝眼泪最频繁的爆发区，晚上可以躺在沙滩上看荧光海浪。</p>
+                    <div class="meta"><span>🌊 果冻海</span><span>✨ 蓝眼泪高频区</span><span>🎫 免费</span></div>
+                </div>
+            </div>
+            <div class="attraction-card">
+                <div class="attraction-img img-south-2">
+                    🏝️
+                    <span class="tag tag-paid">¥38</span>
+                </div>
+                <div class="attraction-body">
+                    <h3>68海里景区（猴研岛）</h3>
+                    <span class="sub">大陆距台湾最近处</span>
+                    <p>距离台湾新竹仅68海里，岛上红色步道蜿蜒、灯塔矗立、奇石嶙峋。"海峡之眼"观景台是标志打卡点，寓意两岸相望。</p>
+                    <div class="meta"><span>📍 距台湾68海里</span><span>🗼 灯塔</span><span>🎫 ¥38</span></div>
+                </div>
+            </div>
+            <div class="attraction-card">
+                <div class="attraction-img img-south-3">
+                    🐘
+                    <span class="tag tag-free">免费</span>
+                </div>
+                <div class="attraction-body">
+                    <h3>象鼻湾</h3>
+                    <span class="sub">拖尾沙滩奇观</span>
+                    <p>退潮时沙滩形似大象鼻子延伸入海，航拍视角极为震撼。两侧海水颜色不同，一侧碧绿一侧深蓝，非常神奇。</p>
+                    <div class="meta"><span>🛸 航拍最佳</span><span>🌊 查潮汐前往</span><span>🎫 免费</span></div>
+                </div>
+            </div>
+            <div class="attraction-card">
+                <div class="attraction-img img-south-4">
+                    🌅
+                    <span class="tag tag-free">免费</span>
+                </div>
+                <div class="attraction-body">
+                    <h3>龙王头沙滩</h3>
+                    <span class="sub">全国最大海滨浴场</span>
+                    <p>平潭最开阔的沙滩，沙质细腻，配套完善。是看日出的最佳地点，清晨海面被染成金色，适合晨跑和早泳。</p>
+                    <div class="meta"><span>🌅 日出首选</span><span>🏊 设施完善</span><span>🎫 免费</span></div>
+                </div>
+            </div>
+            <div class="attraction-card">
+                <div class="attraction-img img-south-5">
+                    ⛰️
+                    <span class="tag tag-paid">¥20</span>
+                </div>
+                <div class="attraction-body">
+                    <h3>将军山</h3>
+                    <span class="sub">登高望海</span>
+                    <p>登上山顶视野开阔，可俯瞰整个海湾和远处海景。山上有军事遗址和奇特岩石，兼具历史与自然风光。</p>
+                    <div class="meta"><span>⛰️ 登高望远</span><span>📸 全景拍摄</span><span>🎫 ¥20</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Island -->
+        <div class="attraction-grid" id="tab-island">
+            <div class="attraction-card">
+                <div class="attraction-img img-island-1">
+                    🐚
+                    <span class="tag tag-free">免费</span>
+                </div>
+                <div class="attraction-body">
+                    <h3>东庠岛</h3>
+                    <span class="sub">《爸爸去哪儿》取景地</span>
+                    <p>保留着原始渔村风貌的离岛，火山岩古厝错落有致，民风淳朴。从流水码头乘船约20分钟可达，适合一日游探秘。</p>
+                    <div class="meta"><span>🎬 爸爸去哪儿</span><span>⛴️ 乘船上岛</span><span>🎫 免费</span></div>
+                </div>
+            </div>
+            <div class="attraction-card">
+                <div class="attraction-img img-island-2">
+                    🏔️
+                    <span class="tag tag-free">免费</span>
+                </div>
+                <div class="attraction-body">
+                    <h3>猫头墘</h3>
+                    <span class="sub">山海全景秘境</span>
+                    <p>位于平潭西北角的小众秘境，山海全景尽收眼底。这里有悬崖餐厅和特色民宿，是逃离喧嚣的世外桃源。</p>
+                    <div class="meta"><span>🤫 小众秘境</span><span>🍽️ 悬崖餐厅</span><span>🎫 免费</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Blue Tears ===== -->
+<section class="blue-tears" id="blue-tears">
+    <div class="container">
+        <div class="section-title">
+            <h2>💙 追泪指南 · 蓝眼泪</h2>
+            <p>被《国家地理》评为世界奇观的梦幻荧光海</p>
+            <div class="title-line"></div>
+        </div>
+        <div class="tears-content">
+            <div class="tears-text">
+                <p><span class="glow">蓝眼泪</span> 是一种由夜光藻（或海萤）引发的自然发光现象。当海水受到扰动时，这些浮游生物会发出幽蓝色荧光，仿佛大海流下的眼泪，又像打翻的银河。</p>
+                <p>用手拨动海水，指尖会带起一串蓝色流光，仿佛掌握了魔法；退潮后的沙滩上留下发光的"蓝脚印"，每一步都像点亮星辰。</p>
+                <div class="tears-tips">
+                    <h4>🎯 追泪公式</h4>
+                    <ul>
+                        <li>南风天 + 涨潮 + 无月光夜 + 水温20-25℃ = 最佳追泪条件</li>
+                        <li>每日黄金时段：20:00 - 凌晨 1:00</li>
+                        <li>推荐农历初一前后（新月期）观赏效果最佳</li>
+                        <li>微信小程序"蓝眼泪实况"可查当天蓝眼泪情况</li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <table class="tears-table">
+                    <thead>
+                        <tr><th>类型</th><th>时间</th><th>特点</th><th>最佳观测点</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>🌊 夜光藻型</td><td>4-6月</td><td>短促蓝涟漪，爆发力强</td><td>长江澳、龙王头、东美村</td></tr>
+                        <tr><td>✨ 海萤型</td><td>7-8月</td><td>发光更大更亮，持续120秒</td><td>东美村、模镜村</td></tr>
+                    </tbody>
+                </table>
+                <table class="tears-table" style="margin-top: 16px;">
+                    <thead>
+                        <tr><th>观测点</th><th>风格</th><th>推荐时段</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>长江澳</td><td>风车+蓝眼泪+银河同框</td><td>21:00-03:00</td></tr>
+                        <tr><td>镜沙</td><td>黑礁石+蓝光暗黑高级感</td><td>22:00-01:00</td></tr>
+                        <tr><td>龙王头</td><td>沙滩阔大，近城区</td><td>夜间</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Food ===== -->
+<section class="food" id="food">
+    <div class="container">
+        <div class="section-title">
+            <h2>🍜 平潭美食</h2>
+            <p>海岛风味，每一口都是大海的馈赠</p>
+            <div class="title-line"></div>
+        </div>
+        <div class="food-grid">
+            <div class="food-card">
+                <div class="icon">🥟</div>
+                <h4>时来运转</h4>
+                <p>地瓜皮包海鲜馅，平潭"灵魂小吃"，软糯鲜香</p>
+                <span class="price">约 ¥8/个</span>
+            </div>
+            <div class="food-card">
+                <div class="icon">🍕</div>
+                <h4>八珍炒糕</h4>
+                <p>"平潭披萨"，虾仁、蟹肉等八珍炒制，外酥里嫩</p>
+                <span class="price">必吃推荐</span>
+            </div>
+            <div class="food-card">
+                <div class="icon">🦪</div>
+                <h4>海蛎煎</h4>
+                <p>经典闽南做法，厚实饱满，鲜嫩多汁</p>
+                <span class="price">特色海鲜</span>
+            </div>
+            <div class="food-card">
+                <div class="icon">🐚</div>
+                <h4>将军帽</h4>
+                <p>礁岩贝类，清蒸吃原味，口感鲜甜弹牙</p>
+                <span class="price">本地特产</span>
+            </div>
+            <div class="food-card">
+                <div class="icon">🍠</div>
+                <h4>天长地久</h4>
+                <p>甜口地瓜粉小吃，花生糖馅，节庆必备</p>
+                <span class="price">约 ¥5/个</span>
+            </div>
+            <div class="food-card">
+                <div class="icon">🍜</div>
+                <h4>海鲜捞面</h4>
+                <p>浓郁的汤底配上新鲜海产，一碗吃遍平潭味道</p>
+                <span class="price">推荐尝试</span>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 24px; color: #888; font-size: 0.9rem;">
+            🏪 推荐餐厅：海坛特色小吃 | 岭上海岛菜 | 竹笠海鲜大排档 | 福记弄堂海鲜捞面
+        </div>
+    </div>
+</section>
+
+<!-- ===== Itinerary ===== -->
+<section class="itinerary" id="itinerary">
+    <div class="container">
+        <div class="section-title">
+            <h2>📅 推荐行程</h2>
+            <p>3天2晚经典路线 · 4天3晚深度游</p>
+            <div class="title-line"></div>
+        </div>
+
+        <div class="itin-card">
+            <h3><span class="day-badge">3天2晚</span> 经典路线（第一次来选这个）</h3>
+            <div class="itin-row"><span class="time">Day 1</span><span class="desc">🏔️ <strong>北线奇遇</strong> — 龙王头日出 → 仙人井 → 镜沙 → 长江澳日落</span></div>
+            <div class="itin-row"><span class="time">Day 2</span><span class="desc">🛣️ <strong>廊道+南线</strong> — 北部生态廊道(F2-F5) → 童话S弯 → 猴研岛 → 坛南湾 → 长江澳追蓝眼泪</span></div>
+            <div class="itin-row"><span class="time">Day 3</span><span class="desc">☕ <strong>悠闲收尾</strong> — 坛南湾发呆/赶海 → 海鲜午餐 → 返程</span></div>
+        </div>
+
+        <div class="itin-card">
+            <h3><span class="day-badge">4天3晚</span> 深度游（时间充裕选这个）</h3>
+            <div class="itin-row"><span class="time">Day 1</span><span class="desc">🌅 龙王头→仙人井→镜沙→长江澳日落（宿北线）</span></div>
+            <div class="itin-row"><span class="time">Day 2</span><span class="desc">🚗 北部生态廊道全线→和平村</span></div>
+            <div class="itin-row"><span class="time">Day 3</span><span class="desc">🏖️ 猴研岛→坛南湾→长江澳追蓝眼泪</span></div>
+            <div class="itin-row"><span class="time">Day 4</span><span class="desc">⛴️ 东庠岛离岛探秘→返程</span></div>
+        </div>
+        <div style="text-align: center; color: #888; font-size: 0.9rem; margin-top: 16px;">
+            💰 人均预算约 <strong style="color:#1a73e8;">¥1,500-2,000</strong>（含交通、住宿3晚、餐饮、门票）
+        </div>
+    </div>
+</section>
+
+<!-- ===== Tips ===== -->
+<section class="tips" id="tips">
+    <div class="container">
+        <div class="section-title">
+            <h2>💡 实用贴士</h2>
+            <p>出发前必看，让你的平潭之旅更完美</p>
+            <div class="title-line"></div>
+        </div>
+        <div class="tips-grid">
+            <div class="tip-card warn">
+                <div class="icon">☀️</div>
+                <h4>防晒必备</h4>
+                <p>紫外线超强，墨镜、帽子、防晒霜全安排，物理防晒最有效。</p>
+            </div>
+            <div class="tip-card warn">
+                <div class="icon">🌬️</div>
+                <h4>防风外套</h4>
+                <p>海风大且早晚温差明显，无论哪个季节都需携带防风外套。</p>
+            </div>
+            <div class="tip-card good">
+                <div class="icon">🌊</div>
+                <h4>查潮汐</h4>
+                <p>赶海务必退潮时前往，关注本地潮汐表。</p>
+            </div>
+            <div class="tip-card good">
+                <div class="icon">📱</div>
+                <h4>蓝眼泪小程序</h4>
+                <p>微信搜"蓝眼泪实况"可查当天蓝眼泪情况。</p>
+            </div>
+            <div class="tip-card good">
+                <div class="icon">🛵</div>
+                <h4>租电动车环岛</h4>
+                <p>岛内最推荐的出行方式，约60-100元/天，随停随拍超惬意。</p>
+            </div>
+            <div class="tip-card good">
+                <div class="icon">📸</div>
+                <h4>穿搭建议</h4>
+                <p>亮色长裙/白色/红色出片；黑沙滩穿黑白灰，反差感更强。</p>
+            </div>
+            <div class="tip-card warn">
+                <div class="icon">🗓️</div>
+                <h4>最佳季节</h4>
+                <p>4-6月（蓝眼泪爆发+天气稳定），7-8月多雨需防台风。</p>
+            </div>
+            <div class="tip-card good">
+                <div class="icon">🏨</div>
+                <h4>住宿选择</h4>
+                <p>县城中心最方便；北线民宿看风车海；坛南湾适合看海。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Transport ===== -->
+<section class="transport" id="transport">
+    <div class="container">
+        <div class="section-title">
+            <h2>🚗 交通指南</h2>
+            <p>从出发到环岛，一篇看懂怎么走</p>
+            <div class="title-line"></div>
+        </div>
+        <div class="transport-grid">
+            <div class="transport-card">
+                <div class="icon">🚄</div>
+                <h4>高铁</h4>
+                <p>直达平潭站，从福州出发仅需30分钟，厦门出发约1.5小时</p>
+                <div class="route">福州 → 平潭 ¥40-60  |  厦门 → 平潭 ¥120+</div>
+            </div>
+            <div class="transport-card">
+                <div class="icon">✈️</div>
+                <h4>飞机</h4>
+                <p>飞到福州长乐机场，转乘机场大巴或包车至平潭</p>
+                <div class="route">长乐机场 → 平潭 约1.5小时  ¥60-100/人</div>
+            </div>
+            <div class="transport-card">
+                <div class="icon">🚗</div>
+                <h4>自驾</h4>
+                <p>沈海高速转渔平高速直达，沿途风景优美</p>
+                <div class="route">福州出发约1h  |  厦门出发约2.5h</div>
+            </div>
+            <div class="transport-card">
+                <div class="icon">🛵</div>
+                <h4>岛内租电动车</h4>
+                <p>岛内最推荐的出行方式，约60-100元/天，随停随拍超惬意</p>
+                <div class="route">¥60-100/天  |  充满电可跑60-80km</div>
+            </div>
+            <div class="transport-card">
+                <div class="icon">🚌</div>
+                <h4>岛内公交</h4>
+                <p>覆盖主要景点，票价便宜但班次较少</p>
+                <div class="route">¥2/次</div>
+            </div>
+            <div class="transport-card">
+                <div class="icon">🚐</div>
+                <h4>包车</h4>
+                <p>适合家庭或团队，司机兼向导，省心省力</p>
+                <div class="route">约¥300-400/天</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+    <p>🌊 平潭旅游攻略 · 邂逅蓝眼泪 · 风车之岛</p>
+    <p style="margin-top: 8px;">数据来源：平潭综合实验区政府网 · Trip.com · 马蜂窝 · 网络综合整理</p>
+    <p style="margin-top: 12px;">Made with <span>♥</span> · 平潭岛 欢迎你</p>
+</footer>
+
+<!-- ===== Back to Top ===== -->
+<button class="back-top" id="backTop" aria-label="返回顶部">↑</button>
+
+<script>
+    // ===== Stars =====
+    (function() {
+        const container = document.getElementById('stars');
+        const count = 120;
+        for (let i = 0; i < count; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 60 + '%';
+            star.style.width = star.style.height = (Math.random() * 3 + 1) + 'px';
+            star.style.setProperty('--d', (Math.random() * 3 + 2) + 's');
+            star.style.animationDelay = Math.random() * 5 + 's';
+            container.appendChild(star);
+        }
+    })();
+
+    // ===== Attraction Tabs =====
+    const tabs = document.querySelectorAll('.attraction-tab');
+    const grids = {
+        north: document.getElementById('tab-north'),
+        south: document.getElementById('tab-south'),
+        island: document.getElementById('tab-island'),
+    };
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            Object.entries(grids).forEach(([key, el]) => {
+                el.classList.toggle('active', key === tab.dataset.tab);
+            });
+        });
+    });
+
+    // ===== Back to Top =====
+    const backTop = document.getElementById('backTop');
+    window.addEventListener('scroll', () => {
+        backTop.classList.toggle('show', window.scrollY > 400);
+    });
+    backTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ===== Nav hide on scroll =====
+    let lastScroll = 0;
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+        const curr = window.scrollY;
+        if (curr > lastScroll && curr > 200) {
+            nav.style.transform = 'translateY(-100%)';
+        } else {
+            nav.style.transform = 'translateY(0)';
+        }
+        lastScroll = curr;
+    });
+</script>
+
+</body>
+</html>
